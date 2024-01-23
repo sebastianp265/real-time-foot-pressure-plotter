@@ -1,0 +1,9 @@
+HOST: str = "redis"
+PORT: int = 6379
+BASE_URL: str = "http://tesla.iem.pw.edu.pl:9080/v2/monitor/"  # URL to endpoint with data
+MAX_SEC: int = 5 * 60
+REQUEST_DELAY: int = 1
+CLEAR_DELAY: int = 60
+IDS = range(1, 7)  # IDs of ppl to request data about
+SENSOR_NUMBER: int = 6
+ANOMALIES_THRESHOLD: float = 0.5  # How many anomalies generate
