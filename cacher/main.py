@@ -124,7 +124,7 @@ async def main():
     except requests.exceptions.ConnectionError as requests_connection_error:
         print(f"There was an error connecting to api:\n{requests_connection_error}")
         # Restart the container if connection to api is lost
-        exit(1)
+        raise SystemExit(1)
     except redis.ConnectionError as redis_connection_error:
         print(f"Redis Connection error occurred:\n{redis_connection_error}")
 
