@@ -1,0 +1,25 @@
+version: "3.8"
+services: 
+  cacher:
+    build: ./cacher
+    image: cacher:dev
+    restart: always
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 5
+        delay: 10s
+    depends_on: 
+      - redis
+  webapp:
+    build: ./webapp
+    image: webapp:dev
+    ports: 
+      - "8050:8050"
+    depends_on: 
+      - redis
+  redis:
+    image: redis:7.2.4-alpine
+    restart: always
+    ports: 
+      - "6379:6379"
