@@ -108,9 +108,9 @@ main_content = dbc.Container(
                 # then custom component for example
             ], className="d-flex flex-column align-items-center justify-content-center"
         ),
-        # dcc.Interval(id="walking_interval", interval=WALKING_INTERVAL, n_intervals=0),
-        dcc.Interval(id="interval", interval=BASIC_INTERVAL, n_intervals=0),
-        # dcc.Interval(id="anomaly_interval", interval=ANOMALY_INTERVAL, n_intervals=0),
+        dcc.Interval(id="walking_interval", interval=1 * 1000, n_intervals=0),
+        dcc.Interval(id="interval", interval=3 * 1000, n_intervals=0),
+        dcc.Interval(id="anomaly_interval", interval=10 * 1000, n_intervals=0),
         dbc.Col(
             [
                 html.H3("Live data", className="text-center"),
@@ -120,7 +120,6 @@ main_content = dbc.Container(
                 html.H3("Anomalies", className="text-center"),
                 dcc.Graph(id="left_foot_anomalies"),
                 dcc.Graph(id="right_foot_anomalies"),
-                # dcc.Graph(id="anomaly_histogram")
             ], className="border shadow pt-5"
         )
     ]
@@ -147,13 +146,13 @@ def change_patient(value):
 @app.callback(
     Output("walking", "figure"),
     Input("patient_id", "data"),
-    # Input("walking_interval", "n_intervals"),
+    Input("walking_interval", "n_intervals"),
 )
 def update_walking_graph(patient_data, n):
     """
-    Updates the walking graph
+    Updates the feet graph
     """
-    pass
+    pass  # Placeholder callback for now, in future it will be used to update custom feet component
 
 
 @app.callback(
@@ -162,7 +161,7 @@ def update_walking_graph(patient_data, n):
     Input("patient_id", "data"),
     Input("interval", "n_intervals"),
 )
-def update_sensors_graph(patient_data):
+def update_sensors_graph(patient_data, n):
     """
     Updates the sensors graph
     """
@@ -189,9 +188,9 @@ def update_sensors_graph(patient_data):
     Output("left_foot_anomalies", "figure"),
     Output("right_foot_anomalies", "figure"),
     Input("patient_id", "data"),
-    Input("interval", "n_intervals"),
+    Input("anomaly_interval", "n_intervals"),
 )
-def update_anomalies_graph(patient_data):
+def update_anomalies_graph(patient_data, n):
     """
     Updates the anomalies graph
     """
