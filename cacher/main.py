@@ -59,7 +59,6 @@ async def clean_old(person_id: int) -> None:
   Asynchronously and periodically remove data older than MAX_SEC
   """
     print("Cleaning old")
-
     key_base: str = f"{person_id}_"
     key_data: str = f"{key_base}data"
     key_timestamp: str = f"{key_base}timestamp"
@@ -71,7 +70,6 @@ async def clean_old(person_id: int) -> None:
                 to_check: int = int(float(sample[0]))
             else:
                 break
-            # print("to Check{:^12}".format(to_check))
             clean: bool = to_check <= int(datetime.datetime.now().timestamp()) - MAX_SEC
             if clean:
                 print("Cleaning")
@@ -129,5 +127,5 @@ async def main():
         print(f"Redis Connection error occurred:\n{redis_connection_error}")
 
 
-logging.basicConfig(level=logging.DEBUG)
+#logging.basicConfig(level=logging.DEBUG)
 asyncio.run(main())

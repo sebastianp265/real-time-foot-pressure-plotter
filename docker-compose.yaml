@@ -7,8 +7,8 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-        max_attempts: 5
-        delay: 10s
+        max_attempts: 10
+        delay: 5s
     depends_on: 
       - redis
   webapp:
