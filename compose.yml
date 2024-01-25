@@ -1,5 +1,5 @@
 version: "3.8"
-services: 
+services:
   cacher:
     build: ./cacher
     image: cacher:dev
@@ -9,17 +9,31 @@ services:
         condition: on-failure
         max_attempts: 10
         delay: 5s
-    depends_on: 
+    depends_on:
       - redis
   webapp:
     build: ./webapp
     image: webapp:dev
-    ports: 
+    ports:
       - "8050:8050"
-    depends_on: 
+    depends_on:
       - redis
   redis:
     image: redis:7.2.4-alpine
     restart: always
-    ports: 
+    ports:
       - "6379:6379"
+    volumes:
+      - redis-volume:/data
+
+  redis_insight:
+    image: redislabs/redisinsight:latest
+    restart: always
+    ports:
+      - '8001:8001'
+    volumes:
+      - redis_insight_volume:/db
+
+volumes:
+  redis-volume:
+  redis_insight_volume:
