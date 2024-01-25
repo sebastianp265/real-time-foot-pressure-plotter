@@ -165,7 +165,7 @@ def update_sensors_graph(patient_data, n):
     """
     Updates the sensors graph
     """
-    key: str = f"{patient_data["id"] + 1}_data"
+    key: str = f"{patient_data['id'] + 1}_data"
     data: list = CACHE.lrange(key, 0, -1)
 
     sensors = []
@@ -194,8 +194,8 @@ def update_anomalies_graph(patient_data, n):
     """
     Updates the anomalies graph
     """
-    key: str = f"{patient_data["id"] + 1}_anomaly"
-    key_date_time: str = f"{patient_data["id"] + 1}_anomaly_timestamp"
+    key: str = f"{patient_data['id'] + 1}_anomaly"
+    key_date_time: str = f"{patient_data['id'] + 1}_anomaly_timestamp"
     anomaly_data: list = CACHE.lrange(key, 0, -1)
     timestamps: list = CACHE.lrange(key_date_time, 0, -1)
     date_time = list(map(lambda x: datetime.datetime.fromtimestamp(int(x)), timestamps))
