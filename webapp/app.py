@@ -10,6 +10,7 @@ from dash.dependencies import Input, Output
 from config import *
 import redis
 import requests
+import foot_custom_component as foot_custom_component
 
 PATIENTS_DATA = []  # List of patient records
 OPTIONS = []  # List of options for the dropdown menu
@@ -18,7 +19,7 @@ CACHE = None  # Redis cache object
 # Try to connect to Redis
 # If Redis is not running, the program will exit
 try:
-    CACHE = redis.Redis(host=HOST, port=PORT)
+    CACHE = redis.Redis(host='localhost', port=PORT)
 except redis.ConnectionError as connection_error:
     print(f"Redis connection error occurred:\n{connection_error}")
     exit(-1)
@@ -104,8 +105,7 @@ main_content = dbc.Container(
                 html.Div(
                     id="patient_basic_info_container", className="d-flex align-items-stretch justify-content-center"
                 ),
-                dbc.Col([dcc.Graph(id="walking")], className="border shadow"),  # Here inside this dbc.Col we put
-                # then custom component for example
+                foot_custom_component.FootCustomComponent(id="foot_custom_component", data="data"),
             ], className="d-flex flex-column align-items-center justify-content-center"
         ),
         dcc.Interval(id="walking_interval", interval=1 * 1000, n_intervals=0),
@@ -144,7 +144,7 @@ def change_patient(value):
 
 
 @app.callback(
-    Output("walking", "figure"),
+    Output("foot_custom_component", "data"),
     Input("patient_id", "data"),
     Input("walking_interval", "n_intervals"),
 )
@@ -152,8 +152,10 @@ def update_walking_graph(patient_data, n):
     """
     Updates the feet graph
     """
-    pass  # Placeholder callback for now, in future it will be used to update custom feet component
+    key: str = f"{patient_data['id'] + 1}_data"
+    data = CACHE.lrange(key, -1, -1)
 
+    return str(data[0], "utf-8")
 
 @app.callback(
     Output("left_foot_sensors", "figure"),
@@ -165,7 +167,7 @@ def update_sensors_graph(patient_data, n):
     """
     Updates the sensors graph
     """
-    key: str = f"{patient_data["id"] + 1}_data"
+    key: str = f"{patient_data['id'] + 1}_data"
     data: list = CACHE.lrange(key, 0, -1)
 
     sensors = []
@@ -194,8 +196,8 @@ def update_anomalies_graph(patient_data, n):
     """
     Updates the anomalies graph
     """
-    key: str = f"{patient_data["id"] + 1}_anomaly"
-    key_date_time: str = f"{patient_data["id"] + 1}_anomaly_timestamp"
+    key: str = f"{patient_data['id'] + 1}_anomaly"
+    key_date_time: str = f"{patient_data['id'] + 1}_anomaly_timestamp"
     anomaly_data: list = CACHE.lrange(key, 0, -1)
     timestamps: list = CACHE.lrange(key_date_time, 0, -1)
     date_time = list(map(lambda x: datetime.datetime.fromtimestamp(int(x)), timestamps))

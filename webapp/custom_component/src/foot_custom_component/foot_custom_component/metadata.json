@@ -1,0 +1,30 @@
+{
+  "src/lib/components/FootCustomComponent.react.js": {
+    "description": "ExampleComponent is an example component.\nIt takes a property, `label`, and\ndisplays it.\nIt renders an input with the property `value`\nwhich is editable by the user.",
+    "displayName": "FootCustomComponent",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The ID used to identify this component in Dash callbacks."
+      },
+      "data": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "the string json encoded data from the sensors\nExample:\n[\n            {\n                'anomaly': False,\n                'name': 'L0',\n                'value': 16\n            },\n            {\n                'anomaly': False,\n                'name': 'L1',\n                'value': 138\n            },\n            {\n                'anomaly': False,\n                'name': 'L2',\n                'value': 13\n            },\n            {\n                'anomaly': False,\n                'name': 'R0',\n                'value': 1023\n            },\n            {\n                'anomaly': False,\n                'name': 'R1',\n                'value': 1023\n            },\n            {\n                'anomaly': False,\n                'name': 'R2',\n                'value': 896\n            }\n]"
+      },
+      "setProps": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that should be called to report property changes\nto Dash, to make them available for callbacks."
+      }
+    }
+  }
+}

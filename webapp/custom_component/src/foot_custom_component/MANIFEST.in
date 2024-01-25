@@ -1,0 +1,11 @@
+include foot_custom_component/foot_custom_component.min.js
+include foot_custom_component/foot_custom_component.min.js.map
+include foot_custom_component/async-*.js
+include foot_custom_component/async-*.js.map
+include foot_custom_component/*-shared.js
+include foot_custom_component/*-shared.js.map
+include foot_custom_component/metadata.json
+include foot_custom_component/package-info.json
+include README.md
+include LICENSE
+include package.json

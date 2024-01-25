@@ -1,0 +1,13 @@
+Package: footCustomComponent
+Title: Foot custom component
+Version: 0.0.1
+Description: Foot custom component
+Depends: R (>= 3.0.2)
+Imports: 
+Suggests: 
+License: MIT + file LICENSE
+URL: https://github.com/sebastianp265/foot-custom-component
+BugReports: https://github.com/sebastianp265/foot-custom-component/issues
+Encoding: UTF-8
+LazyData: true
+KeepSource: true
