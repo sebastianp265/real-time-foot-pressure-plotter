@@ -19,7 +19,7 @@ CACHE = None  # Redis cache object
 # Try to connect to Redis
 # If Redis is not running, the program will exit
 try:
-    CACHE = redis.Redis(host='localhost', port=PORT)
+    CACHE = redis.Redis(host=HOST, port=PORT)
 except redis.ConnectionError as connection_error:
     print(f"Redis connection error occurred:\n{connection_error}")
     exit(-1)
