@@ -108,7 +108,7 @@ main_content = dbc.Container(
                 foot_custom_component.FootCustomComponent(id="foot_custom_component", data="data"),
             ], className="d-flex flex-column align-items-center justify-content-center"
         ),
-        dcc.Interval(id="walking_interval", interval=1 * 1000, n_intervals=0),
+        dcc.Interval(id="walking_interval", interval=3 * 1000, n_intervals=0),
         dcc.Interval(id="interval", interval=3 * 1000, n_intervals=0),
         dcc.Interval(id="anomaly_interval", interval=10 * 1000, n_intervals=0),
         dbc.Col(
